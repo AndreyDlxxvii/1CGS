@@ -35,6 +35,5 @@ namespace Code
             result.Reverse();
             return new string(result.ToArray());
         }
-            
     }
 }

@@ -11,6 +11,7 @@ namespace Code.UI
         void TryOpenView(ViewNames name);
         void TryCloseView(ViewNames name);
     }
+    
     public class UiController : MonoBehaviour, IUiController
     {
         [SerializeField] private Transform _rootViewTransform;
@@ -42,9 +43,7 @@ namespace Code.UI
         public void TryOpenView(ViewNames name)
         {
             if (_views.TryGetValue(name, out var view))
-            {
                 view.Open();
-            }
             else
             {
                 var config = _viewConfigs.GetConfig(name);

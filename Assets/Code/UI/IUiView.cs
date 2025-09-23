@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Code.Configs;
+﻿using Code.Configs;
 
 namespace Code.UI
 {

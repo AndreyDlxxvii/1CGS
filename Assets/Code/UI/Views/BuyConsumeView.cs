@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Configs;
+﻿using Code.Configs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

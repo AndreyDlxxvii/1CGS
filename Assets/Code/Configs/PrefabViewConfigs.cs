@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Code.Configs
 {
-
     public interface IViewConfigs
     {
         ViewPrefabs GetConfig(ViewNames type);
