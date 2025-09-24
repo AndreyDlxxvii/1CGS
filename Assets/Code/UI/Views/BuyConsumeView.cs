@@ -28,6 +28,7 @@ namespace Code.UI.Views
             _buyMedPacket.onClick.AddListener(TryBuyMedPacket);
             _buyArmorPlate.onClick.AddListener(TryBuyArmorPlate);
             GameModel.ModelChanged += Refresh;
+            GameModel.OperationComplete += HandleOperationComplete;
             Refresh();
         }
 
@@ -48,6 +49,12 @@ namespace Code.UI.Views
             GameModel.BuyConsumableForCredit(GameModel.ConsumableTypes.Medpack);
             _buyMedPacket.interactable = false;
         }
+        
+        private void HandleOperationComplete(GameModel.OperationResult result)
+        {
+            if (!result.IsSuccess)
+                Debug.LogError($"[{GetType().Name}] Get some error: {result.ErrorDescription}");
+        }
 
         protected override void Refresh()
         {
@@ -63,6 +70,7 @@ namespace Code.UI.Views
         protected override void OnClose()
         {
             GameModel.ModelChanged -= Refresh;
+            GameModel.OperationComplete -= HandleOperationComplete;
             _closeButton.onClick.RemoveAllListeners();
             _buyMedPacket.onClick.RemoveAllListeners();
             _buyArmorPlate.onClick.RemoveAllListeners();

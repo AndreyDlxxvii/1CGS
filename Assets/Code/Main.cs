@@ -22,6 +22,9 @@ namespace Code
         {
             if (!_isInitialized)
                 return;
+
+            if (!GameModel.HasRunningOperations)
+                return;
             
             GameModel.Update();
         }

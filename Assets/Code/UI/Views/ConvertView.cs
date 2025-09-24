@@ -34,6 +34,7 @@ namespace Code.UI.Views
             _closeButton.onClick.AddListener(Close);
             _changeButton.onClick.AddListener(ApplyExchange);
             GameModel.ModelChanged += Refresh;
+            GameModel.OperationComplete += HandleOperationComplete;
             
             ValidateInput(_inputField.text);
             Refresh();
@@ -90,12 +91,19 @@ namespace Code.UI.Views
             ValidateInput(_inputField.text);
         }
         
+        private void HandleOperationComplete(GameModel.OperationResult result)
+        {
+            if (!result.IsSuccess)
+                Debug.LogError($"[{GetType().Name}] Get some error: {result.ErrorDescription}");
+        }
+        
         protected override void OnClose()
         {
             _closeButton.onClick.RemoveAllListeners();
             _inputField.onValueChanged.RemoveAllListeners();
             _changeButton.onClick.RemoveAllListeners();
             GameModel.ModelChanged -= Refresh;
+            GameModel.OperationComplete -= HandleOperationComplete;
         }
     }
 }

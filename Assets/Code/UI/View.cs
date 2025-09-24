@@ -1,4 +1,5 @@
-﻿using Code.Configs;
+﻿using System;
+using Code.Configs;
 using UnityEngine;
 
 namespace Code.UI
@@ -17,6 +18,8 @@ namespace Code.UI
             {
                 _isActivated = true;
                 gameObject.SetActive(true);
+                GameModel.ModelChanged += Refresh;
+                
                 OnOpen();
             }
             else
@@ -29,9 +32,14 @@ namespace Code.UI
             _isActivated = false;
             OnClose();
         }
-        
-        protected virtual void OnOpen() { }
-        protected virtual void OnClose() { }
-        protected virtual void Refresh() { }
+
+        private void OnDestroy()
+        {
+            OnClose();
+        }
+
+        protected virtual void OnOpen() {}
+        protected virtual void OnClose() {}
+        protected virtual void Refresh() {}
     }
 }
